@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Demo de sistema de feedback para Aeropostal Venezuela">
+  <title>Aeropostal | Sistema de Feedback</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="app">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-view="welcome" aria-label="Aeropostal inicio">
+        <img src="aeropostal.jpg" alt="Logo Aeropostal">
+      </a>
+      <div class="sidebar-caption">SISTEMA DE FEEDBACK</div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="welcome"><span>⌂</span> Inicio</button>
+        <button class="nav-link" data-view="feedback"><span>▤</span> Nuevo feedback</button>
+        <button class="nav-link admin-only hidden" data-view="submissions"><span>☷</span> Opiniones recibidas</button>
+        <button class="nav-link admin-only hidden" data-view="dashboard"><span>▥</span> Panel de análisis</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span> Demo interactiva
+        <button class="nav-link" id="resetDemo"><span>↻</span> Reiniciar demo</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><img src="aeropostal.jpg" alt="Aeropostal"></div>
+        <div><div class="eyebrow">AEROPOSTAL · VENEZUELA</div><div class="top-title" id="pageTitle">Tu opinión nos lleva más lejos</div></div>
+        <div class="top-actions"><button class="btn outline admin-entry" id="adminEntry">Acceso empresa</button><button class="btn outline hidden" id="adminLogout">Cerrar sesión</button><div class=></div></div>
+      </header>
+
+      <section class="view active" id="view-welcome">
+        <div class="hero">
+          <div class="hero-content">
+            <span class="kicker">ESCUCHAMOS PARA MEJORAR</span>
+            <h1>Tu opinión<br>también nos lleva<br><em>más lejos.</em></h1>
+            <p>En Aeropostal valoramos cada experiencia. Comparte tus ideas como agencia de viajes o viajero frecuente para ayudarnos a mejorar nuestros servicios.</p>
+            <div class="hero-actions">
+              <button class="participant-card" data-participant="Agencia de viaje"><span class="participant-icon">▥</span><span><b>Agencias de viaje</b><small>Comparte tu experiencia</small></span><span class="arrow">↗</span></button>
+              <button class="participant-card" data-participant="Viajero frecuente"><span class="participant-icon">✈</span><span><b>Viajeros frecuentes</b><small>Tu opinión también cuenta</small></span><span class="arrow">↗</span></button>
+            </div>
+          </div>
+          <div class="hero-image" role="img" aria-label="Avión volando sobre las nubes"></div>
+        </div>
+        <div class="welcome-bottom">
+          <div><span class="mini-icon">✦</span><div><b>Tu voz genera cambios</b><small>Comparte lo que funciona y lo que podemos mejorar.</small></div></div>
+          <div><span class="mini-icon">◷</span><div><b>Solo toma unos minutos</b><small>Completa los pasos y envía tus sugerencias.</small></div></div>
+          <div><span class="mini-icon">⌁</span><div><b>Enfoque en la experiencia</b><small>Ayúdanos a priorizar futuras mejoras.</small></div></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-feedback">
+        <div class="page-heading"><div><span class="kicker">FORMULARIO DE OPINIÓN</span><h1>Nuevo feedback</h1><p>Tu opinión nos ayuda a mejorar.</p></div><span class="secure-label">● Guardado local de demo</span></div>
+        <div class="form-layout">
+          <div class="form-main card">
+            <div class="steps">
+              <div class="step active" data-step-indicator="1"><span>1</span><small>Perfil</small></div><i></i>
+              <div class="step" data-step-indicator="2"><span>2</span><small>Experiencia</small></div><i></i>
+              <div class="step" data-step-indicator="3"><span>3</span><small>Mejora</small></div>
+            </div>
+            <form id="feedbackForm" novalidate>
+              <div class="form-step active" data-step="1">
+                <h2>1. ¿Quién eres?</h2><p class="section-desc">Selecciona tu tipo de participante y completa la información.</p>
+                <div class="profile-options">
+                  <button type="button" class="profile-option selected" data-profile="Agencia de viaje"><span class="profile-symbol">▥</span><span><b>Agencia de viaje</b><small>Representas una agencia de viajes.</small></span></button>
+                  <button type="button" class="profile-option" data-profile="Viajero frecuente"><span class="profile-symbol">♙</span><span><b>Viajero frecuente</b><small>Compartes tu experiencia de viaje.</small></span></button>
+                </div>
+                <input type="hidden" id="participantType" value="Agencia de viaje">
+                <div class="field-grid">
+                  <label id="organizationLabel">Nombre de la agencia *<input id="organization" required placeholder="Ej. Viajes del Sur"></label>
+                  <label id="rifLabel">RIF / ID de la agencia *<input id="identifier" required placeholder="Ej. J-12345678-9"></label>
+                  <label>Cargo / ocupación *<input id="role" required placeholder="Ej. Gerente de ventas"></label>
+                  <label>Correo electrónico *<input id="email" type="email" required placeholder="Ej. agencia@ejemplo.com"></label>
+                  <label>Teléfono de contacto *<input id="phone" required placeholder="Ej. +58 412 1234567"></label>
+                  <label>Ciudad (opcional)<input id="city" placeholder="Ej. Caracas"></label>
+                </div>
+                <div class="form-footer"><span class="required-note">* Campos obligatorios</span><button type="button" class="btn primary" data-next="2">Siguiente <span>→</span></button></div>
+              </div>
+
+              <div class="form-step" data-step="2">
+                <h2>2. Tu experiencia</h2><p class="section-desc">Cuéntanos sobre tu experiencia y califica los siguientes aspectos.</p>
+                <label class="full-field">Tipo de servicio<select id="serviceType"><option>Vuelo nacional</option><option>Vuelo internacional</option><option>Reservas y emisión</option><option>Atención al cliente</option><option>Equipaje</option><option>Otro servicio</option></select></label>
+                <div class="rating-list" id="ratingList"></div>
+                <label class="full-field">¿Qué fue lo que más te gustó?<textarea id="positive" rows="3" placeholder="Cuéntanos qué destacarías de tu experiencia..."></textarea></label>
+                <label class="full-field">Descripción de la experiencia *<textarea id="experience" rows="4" required placeholder="¿Qué ocurrió? Incluye detalles que nos ayuden a entender la situación..."></textarea></label>
+                <div class="form-footer"><button type="button" class="btn ghost" data-prev="1">← Anterior</button><button type="button" class="btn primary" data-next="3">Siguiente <span>→</span></button></div>
+              </div>
+
+              <div class="form-step" data-step="3">
+                <h2>3. Propuesta de mejora</h2><p class="section-desc">¿Qué podemos hacer para mejorar?</p>
+                <label class="full-field">Área de mejora<select id="area"><option value="">Selecciona una opción</option><option>Puntualidad</option><option>Atención a bordo</option><option>Equipaje</option><option>Atención en mostradores</option><option>Proceso de reserva</option><option>Comunicación y notificaciones</option><option>Atención al cliente</option><option>Plataforma digital</option><option>Otro</option></select></label>
+                <label class="full-field">Descripción de la propuesta *<textarea id="proposal" rows="5" required placeholder="Cuéntanos tu sugerencia y cómo podría ayudar..."></textarea></label>
+                <div class="field-label">Prioridad de la propuesta</div>
+                <div class="priority-options">
+                  <label class="priority-option high"><input type="radio" name="priority" value="Alta"><span>♨</span> Alta</label>
+                  <label class="priority-option medium"><input type="radio" name="priority" value="Media" checked><span>★</span> Media</label>
+                  <label class="priority-option low"><input type="radio" name="priority" value="Baja"><span>♙</span> Baja</label>
+                </div>
+                <label class="checkline"><input id="followup" type="checkbox"> Deseo recibir información sobre las mejoras implementadas.</label>
+                <label class="checkline"><input id="consent" type="checkbox" required> Confirmo que la información proporcionada es correcta. *</label>
+                <div class="form-footer"><button type="button" class="btn ghost" data-prev="2">← Anterior</button><button type="submit" class="btn primary">Enviar feedback <span>→</span></button></div>
+              </div>
+            </form>
+          </div>
+          <aside class="form-aside">
+            <div class="aside-card"><span class="aside-icon">✦</span><h3>Tu opinión importa</h3><p>Cada comentario nos ayuda a identificar oportunidades y mejorar el servicio.</p></div>
+            <div class="aside-card"><span class="aside-icon">⌁</span><h3>¿Qué sucede después?</h3><p>Tu feedback se registra en esta demo y aparece en el panel de análisis para su revisión.</p></div>
+            <div class="privacy-note">ⓘ Esta es una demostración. Los datos se guardan únicamente en este navegador y no se envían a Aeropostal.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-submissions">
+        <div class="page-heading"><div><span class="kicker">SEGUIMIENTO</span><h1>Mis envíos</h1><p>Consulta las opiniones registradas en este navegador.</p></div><button class="btn primary" data-view="feedback">＋ Nuevo feedback</button></div>
+        <div class="card table-card"><div class="table-toolbar"><div><b>Opiniones registradas</b><small id="submissionCount">0 registros</small></div><input id="submissionSearch" class="search-input" placeholder="⌕  Buscar por nombre o área..."></div><div class="table-scroll"><table><thead><tr><th>Fecha</th><th>Participante</th><th>Área</th><th>Prioridad</th><th>Estado</th><th></th></tr></thead><tbody id="submissionRows"></tbody></table></div><div id="submissionEmpty" class="empty-state hidden">No hay opiniones que coincidan con la búsqueda.</div></div>
+      </section>
+
+      <section class="view" id="view-dashboard">
+        <div class="page-heading"><div><span class="kicker">INTELIGENCIA DE EXPERIENCIA</span><h1>Panel de análisis</h1><p>Resumen de la retroalimentación recibida.</p></div><div class="toolbar-actions"><select id="periodFilter" class="compact-select"><option value="all">Todo el período</option><option value="90">Últimos 3 meses</option><option value="30">Últimos 30 días</option></select><button class="btn outline" id="exportCsv">↓ Exportar CSV</button></div></div>
+        <div class="stats-grid">
+          <div class="stat-card"><span>Total de opiniones</span><div class="stat-value" id="statTotal">0</div><small><span class="green">↗</span> Registros en la demo</small></div>
+          <div class="stat-card"><span>Agencias de viaje</span><div class="stat-value" id="statAgencies">0</div><small id="agencyShare">0% del total</small></div>
+          <div class="stat-card"><span>Viajeros frecuentes</span><div class="stat-value" id="statTravelers">0</div><small id="travelerShare">0% del total</small></div>
+          <div class="stat-card"><span>Prioridad alta</span><div class="stat-value" id="statHigh">0</div><small id="highShare">Pendientes de revisión</small></div>
+        </div>
+        <div class="analytics-grid">
+          <div class="card chart-card"><div class="card-heading"><div><h3>Opiniones por área de mejora</h3><p>Distribución de los temas reportados</p></div></div><div id="areaBars" class="bar-chart"></div></div>
+          <div class="card chart-card"><div class="card-heading"><div><h3>Distribución por perfil</h3><p>Tipo de participante</p></div></div><div class="donut-wrap"><div class="donut" id="profileDonut"><div><b id="donutTotal">0</b><small>opiniones</small></div></div></div><div class="legend"><span><i class="legend-dot blue"></i> Agencias de viaje <b id="legendAgency">0%</b></span><span><i class="legend-dot navy"></i> Viajeros frecuentes <b id="legendTraveler">0%</b></span></div></div>
+          <div class="card chart-card trend-card"><div class="card-heading"><div><h3>Tendencia de opiniones</h3><p>Actividad de los últimos seis meses</p></div></div><div id="trendChart" class="trend-chart"></div></div>
+        </div>
+        <div class="card table-card"><div class="table-toolbar"><div><b>Últimos feedbacks</b><small>Revisa las opiniones y sus prioridades.</small></div><div class="toolbar-actions"><input id="dashboardSearch" class="search-input" placeholder="⌕  Buscar..."><select id="priorityFilter" class="compact-select"><option value="">Todas las prioridades</option><option>Alta</option><option>Media</option><option>Baja</option></select></div></div><div class="table-scroll"><table><thead><tr><th>Fecha</th><th>Tipo</th><th>Área</th><th>Prioridad</th><th>Resumen</th><th></th></tr></thead><tbody id="dashboardRows"></tbody></table></div><div id="dashboardEmpty" class="empty-state hidden">No se encontraron opiniones con esos filtros.</div></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="adminLoginModal" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle">
+    <div class="modal login-modal">
+      <div class="modal-top"><div><span class="kicker">ÁREA RESTRINGIDA</span><h2 id="adminLoginTitle">Acceso de Aeropostal</h2></div><button class="icon-button" id="closeAdminLogin" aria-label="Cerrar">×</button></div>
+      <p class="login-intro">Introduce la contraseña de demostración para acceder a las opiniones recibidas y al panel de análisis.</p>
+      <form id="adminLoginForm">
+        <label class="full-field">Contraseña de administrador<input id="adminPassword" type="password" required autocomplete="current-password" placeholder="Introduce la contraseña"></label>
+        <p id="loginError" class="login-error hidden">La contraseña no es correcta. Inténtalo de nuevo.</p>
+        <div class="login-demo-note"><b>Contraseña de demo:</b> Aero2026!</div>
+        <div class="form-footer"><button type="button" class="btn ghost" id="cancelAdminLogin">Cancelar</button><button type="submit" class="btn primary">Entrar al panel →</button></div>
+      </form>
+      <p class="security-warning">Demo únicamente: esta contraseña se comprueba en el navegador y no constituye seguridad real. No uses datos personales reales.</p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal"><div class="modal-top"><button class="back-link" id="closeDetail">← Volver al listado</button><button class="icon-button" id="closeDetailX" aria-label="Cerrar">×</button></div><div id="detailContent"></div><div class="modal-footer"><button class="btn outline" id="deleteRecord">Eliminar registro</button><button class="btn primary" id="closeDetailBottom">Cerrar</button></div></div>
+  </div>
+  <script src="app.js"></script>
+  
+  <style>
+  .hero-image {
+    background: url("avion.jpg") center center / cover no-repeat !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+</style>
+</body>
+</html>
